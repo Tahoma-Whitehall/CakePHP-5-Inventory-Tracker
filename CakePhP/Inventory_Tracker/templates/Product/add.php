@@ -20,8 +20,6 @@
                     echo $this->Form->control('name');
                     echo $this->Form->control('quantity');
                     echo $this->Form->control('price');
-                    //echo $this->Form->control('flag');
-                    //echo $this->Form->control('last_updated');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

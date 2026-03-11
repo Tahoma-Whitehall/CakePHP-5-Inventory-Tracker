@@ -76,9 +76,6 @@ class ProductController extends AppController
             if($data['quantity'] == 0){
                 $data['status'] = 'out stock'; 
             }
-
-            // Modify data in the controller
-            //$data['name'] = 'A' . $data['name']; 
             
             $product = $this->Product->patchEntity($product, $data);
             if ($this->Product->save($product)) {
@@ -115,12 +112,9 @@ class ProductController extends AppController
             if($data['quantity'] == 0){
                 $data['status'] = 'out stock'; 
             }
-
-            // Modify data in the controller
-            //$data['name'] = 'A' . $data['name']; 
             
             $product = $this->Product->patchEntity($product, $data);
-            //$product = $this->Product->patchEntity($product, $this->request->getData());
+            
             if ($this->Product->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
 
@@ -143,6 +137,7 @@ class ProductController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Product->get($id, contain: []);
         $data['flag'] = 1;
+        $data['last_updated'] = date("d-m-Y H:i:s ") . date_default_timezone_get(); 
         $product = $this->Product->patchEntity($product, $data);
         if ($this->Product->save($product)) {
             $this->Flash->success(__('The product has been flagged for deletetion.'));

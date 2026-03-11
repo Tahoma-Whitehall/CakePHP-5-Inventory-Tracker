@@ -4,6 +4,21 @@
  * @var iterable<\App\Model\Entity\Product> $product
  */
 ?>
+<div class="column column-80">
+        <div class="product form content">
+            <?= $this->Form->create($product) ?>
+            <fieldset>
+                <?php
+                    $options=['out' => 'out stock' , 'low' => 'low stock' , 'in' => 'in stock'];
+                    echo $this->Form->control('name_search');
+                    echo $this->Form->select('filter' , $options, ['empty' => true]);
+                    echo $this->Form->control('delete_flagged',['type' => 'checkbox']);
+                ?>
+            </fieldset>
+            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->end() ?>
+        </div>
+</div>
 
 
 <div class="product index content">
@@ -13,7 +28,6 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('quantity') ?></th>
                     <th><?= $this->Paginator->sort('price') ?></th>
@@ -26,7 +40,6 @@
             <tbody>
                 <?php foreach ($product as $product): ?>
                 <tr>
-                    <td><?= $this->Number->format($product->id) ?></td>
                     <td><?= h($product->name) ?></td>
                     <td><?= $this->Number->format($product->quantity) ?></td>
                     <td><?= $this->Number->format($product->price) ?></td>
