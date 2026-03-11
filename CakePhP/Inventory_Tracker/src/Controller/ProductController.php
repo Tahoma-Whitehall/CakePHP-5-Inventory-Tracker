@@ -28,7 +28,6 @@ class ProductController extends AppController
             $filter=$data['filter'];
 
             if($data['delete_flagged'] == 1){
-                $name="Thomas";
                 $this->Product->deleteAll(['Product.flag LIKE' => 1]);
             }
         }
