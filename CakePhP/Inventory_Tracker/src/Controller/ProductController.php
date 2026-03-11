@@ -14,10 +14,25 @@ class ProductController extends AppController
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
+     * @return string $name
+     * @return string $filter 
      */
     public function index()
     {   
-        $query = $this->Product->find('all');
+        $name="";
+        $filter="";
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $data = $this->request->getData();
+            $name=$data['name_search'];
+            $filter=$data['filter'];
+
+            if($data['delete_flagged'] == 1){
+                $this->Product->deleteAll(['Product.flag LIKE' => 1]);
+            }
+        }
+        $query = $this->Product->find('all', conditions: ['Product.name LIKE' => '%'.$name.'%' ,
+             'Product.status LIKE' => '%'.$filter.'%']);
         
         $product = $this->paginate($query);
 
@@ -61,9 +76,6 @@ class ProductController extends AppController
             if($data['quantity'] == 0){
                 $data['status'] = 'out stock'; 
             }
-
-            // Modify data in the controller
-            //$data['name'] = 'A' . $data['name']; 
             
             $product = $this->Product->patchEntity($product, $data);
             if ($this->Product->save($product)) {
@@ -100,12 +112,9 @@ class ProductController extends AppController
             if($data['quantity'] == 0){
                 $data['status'] = 'out stock'; 
             }
-
-            // Modify data in the controller
-            //$data['name'] = 'A' . $data['name']; 
             
             $product = $this->Product->patchEntity($product, $data);
-            //$product = $this->Product->patchEntity($product, $this->request->getData());
+            
             if ($this->Product->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
 
@@ -126,9 +135,12 @@ class ProductController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $product = $this->Product->get($id);
-        if ($this->Product->delete($product)) {
-            $this->Flash->success(__('The product has been deleted.'));
+        $product = $this->Product->get($id, contain: []);
+        $data['flag'] = 1;
+        $data['last_updated'] = date("d-m-Y H:i:s ") . date_default_timezone_get(); 
+        $product = $this->Product->patchEntity($product, $data);
+        if ($this->Product->save($product)) {
+            $this->Flash->success(__('The product has been flagged for deletetion.'));
         } else {
             $this->Flash->error(__('The product could not be deleted. Please, try again.'));
         }
