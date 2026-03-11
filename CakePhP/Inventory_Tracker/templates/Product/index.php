@@ -5,6 +5,7 @@
  */
 ?>
 
+
 <div class="product index content">
     <?= $this->Html->link(__('New Product'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Product') ?></h3>
@@ -39,7 +40,7 @@
                             __('Delete'),
                             ['action' => 'delete', $product->id],
                             [
-                                'method' => 'delete',
+                                'method' => 'post',
                                 'confirm' => __('Are you sure you want to delete # {0}?', $product->id),
                             ]
                         ) ?>
