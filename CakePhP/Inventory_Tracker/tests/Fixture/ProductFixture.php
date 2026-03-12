@@ -30,6 +30,8 @@ class ProductFixture extends TestFixture
                 'quantity' => 1,
                 'price' => 1,
                 'status' => 'Lorem ipsum dolor sit amet',
+                'last_updated' => 'Lorem ipsum dolor sit amet',
+                'flag' => 0,
             ],
         ];
         parent::init();
