@@ -20,7 +20,6 @@
         </div>
 </div>
 
-
 <div class="product index content">
     <?= $this->Html->link(__('New Product'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Product') ?></h3>
