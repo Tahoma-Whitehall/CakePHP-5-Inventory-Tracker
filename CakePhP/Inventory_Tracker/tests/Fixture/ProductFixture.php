@@ -25,13 +25,13 @@ class ProductFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
-                'quantity' => 1,
-                'price' => 1,
-                'status' => 'Lorem ipsum dolor sit amet',
-                'last_updated' => 'Lorem ipsum dolor sit amet',
-                'flag' => 0,
+                'id'    => 1,
+                'name'    => 'Chair',
+                'quantity' => 90,
+                'price' => 90,
+                'status'    => 'in stock',
+                'flag' => 1,
+                'last_updated' => date("d-m-Y H:i:s ") . date_default_timezone_get(),
             ],
         ];
         parent::init();

@@ -33,7 +33,15 @@ class ProductControllerTest extends TestCase
      */
     public function testIndex(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $data = [
+            'name_search'    => 'Chair',
+            'filter'    => '',
+            'Delete_Flagged' => 1,
+        ];
+        
+        $articles = $this->getTableLocator()->get('Product');
+        $query = $articles->find()->where(['name' => $data['name_search']]);
+        $this->assertEquals(1, $query->count());
     }
 
     /**
@@ -44,7 +52,9 @@ class ProductControllerTest extends TestCase
      */
     public function testView(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/product/view');
+
+        $this->assertResponseOk();
     }
 
     /**
@@ -55,7 +65,9 @@ class ProductControllerTest extends TestCase
      */
     public function testAdd(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/product/add');
+
+        $this->assertResponseOk();
     }
 
     /**
@@ -66,17 +78,9 @@ class ProductControllerTest extends TestCase
      */
     public function testEdit(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/product/edit');
+
+        $this->assertResponseOk();
     }
 
-    /**
-     * Test delete method
-     *
-     * @return void
-     * @link \App\Controller\ProductController::delete()
-     */
-    public function testDelete(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
 }

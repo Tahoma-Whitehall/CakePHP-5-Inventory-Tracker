@@ -16,7 +16,7 @@ class ProductTableTest extends TestCase
      *
      * @var \App\Model\Table\ProductTable
      */
-    protected $Product;
+    protected $ProductTable;
 
     /**
      * Fixtures
@@ -36,7 +36,7 @@ class ProductTableTest extends TestCase
     {
         parent::setUp();
         $config = $this->getTableLocator()->exists('Product') ? [] : ['className' => ProductTable::class];
-        $this->Product = $this->getTableLocator()->get('Product', $config);
+        $this->ProductTable = $this->getTableLocator()->get('Product', $config);
     }
 
     /**
@@ -46,30 +46,26 @@ class ProductTableTest extends TestCase
      */
     protected function tearDown(): void
     {
-        unset($this->Product);
+        unset($this->ProductTable);
 
         parent::tearDown();
     }
 
     /**
-     * Test validationDefault method
+     * Test
      *
      * @return void
-     * @link \App\Model\Table\ProductTable::validationDefault()
+     * @link
      */
-    public function testValidationDefault(): void
+    public function testTableContains(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
+        $query = $this->ProductTable->find('all')->select(['id', 'name']);
+        $this->assertInstanceOf('Cake\ORM\Query\SelectQuery', $query);
+        $result = $query->enableHydration(false)->toArray();
+        $expected = [
+            ['id' => 1, 'name' => 'Chair'],
+        ];
+        $this->assertArrayIsEqualToArrayOnlyConsideringListOfKeys($expected, $result,['id','name']);
 
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     * @link \App\Model\Table\ProductTable::buildRules()
-     */
-    public function testBuildRules(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
     }
 }
