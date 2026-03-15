@@ -32,7 +32,7 @@ class ProductController extends AppController
             }
         }
         $query = $this->Product->find('all', conditions: ['Product.name LIKE' => '%'.$name.'%' ,
-             'Product.status LIKE' => '%'.$filter.'%']);
+            'Product.status LIKE' => '%'.$filter.'%']);
         
         $product = $this->paginate($query);
 
