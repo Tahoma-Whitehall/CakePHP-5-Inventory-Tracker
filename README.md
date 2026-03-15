@@ -17,7 +17,7 @@
 
 Running Project:
 
-Once the project is downloaded with XAMPP or equivilent turned on (both Apache and MySQL) the commandline can be used to run migrations, however this project came under errors that I believe are due to errors in the migration software, which means manual setup of the table may be required (please see below), ensure that your database is linked to the system by inspecting app_local.php in the config folder. bin/cake seeds run --force can be used to populate this table.
+Once the project is downloaded with XAMPP or equivilent turned on (both Apache and MySQL) the commandline can be used to run migrations, however this project came under errors that I believe are due to errors in the migration software, which means manual setup of the table may be required (please see below), ensure that your database is linked to the system by inspecting app_local.php in the config folder. bin/cake seeds run --force can be used to populate this table. The home page is /Inventory_Tracker/product.
 
 Manual Table Setup:
 
